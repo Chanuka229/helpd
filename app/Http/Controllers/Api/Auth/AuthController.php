@@ -66,7 +66,10 @@ class AuthController extends Controller
         $token = $request->bearerToken();
 
         // Find the token instance
-        $tokenInstance = $user->tokens()->where('token', hash('sha256', $token))->first();
+        $tokenInstance = $user->tokens()->where('token', hash('sha256', $token))->first();> git commit -m "first commit"
+        >>
+        fatal: could not open '.git/COMMIT_EDITMSG': Permission denied
+        PS C:\xampp\htdocs\helpdesk\laradesk-1.1.2>
 
         // Check if it's a TransientToken
         if ($tokenInstance instanceof TransientToken) {
