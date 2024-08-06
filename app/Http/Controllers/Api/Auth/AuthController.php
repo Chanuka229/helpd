@@ -61,25 +61,17 @@ class AuthController extends Controller
     public function logout(Request $request)
     {
         $user = $request->user();
-
-        // Get the token from the request
-        $token = $request->bearerToken();
-
-        // Find the token instance
-        $tokenInstance = $user->tokens()->where('token', hash('sha256', $token))->first();> git commit -m "first commit"
-        >>
-        fatal: could not open '.git/COMMIT_EDITMSG': Permission denied
-        PS C:\xampp\htdocs\helpdesk\laradesk-1.1.2>
-
-        // Check if it's a TransientToken
-        if ($tokenInstance instanceof TransientToken) {
-            // Handle the logout process for transient tokens (if needed)
-        } elseif ($tokenInstance instanceof PersonalAccessToken) {
-            // Delete the token from the database
-        $tokenInstance->delete();
+    
+        if ($user->currentAccessToken() instanceof TransientToken) {
+            // Handle the case where the token is transient (e.g., for session-based authentication)
+        } elseif ($user->currentAccessToken() instanceof PersonalAccessToken) {
+            // Delete the persistent token
+            $user->currentAccessToken()->delete();
         }
-
-        return response()->json(['message' => 'Logged out successfully']);
+    
+        // Perform other logout operations here, like logging the user out of the session, etc.
+    
+        return response()->json(['message' => 'Logged out successfully.']);
     }
     /**
      * @param  RegisterRequest  $request
