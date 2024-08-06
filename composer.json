@@ -10,16 +10,16 @@
     "require": {
         "php": "^7.3|^8.0",
         "ext-json": "*",
-        "dacoto/laravel-setenv": "^2.0",
-        "fideloper/proxy": "^4.2",
-        "fruitcake/laravel-cors": "^2.0",
+        "dacoto/laravel-env-set": "^1.0",  // Ensure compatibility with your PHP version
+        "psr/http-factory": "^1.0",
         "guzzlehttp/guzzle": "^7.0",
         "kkomelin/laravel-translatable-string-exporter": "^1.11",
         "laravel/framework": "^8.0",
         "laravel/sanctum": "^2.6",
         "laravel/tinker": "^2.0",
         "sentry/sentry-laravel": "^2.1",
-        "tucker-eric/eloquentfilter": "^2.4"
+        "tucker-eric/eloquentfilter": "^2.4",
+        "symfony/mailer": "^6.0"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.8",
@@ -70,5 +70,8 @@
             "@php artisan ide-helper:meta -n",
             "@php artisan ide-helper:models -W -n"
         ]
+    },
+    "allow-plugins": {
+        "php-http/discovery": true
     }
 }
